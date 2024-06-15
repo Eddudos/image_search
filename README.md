@@ -10,6 +10,11 @@ Obviously not cherry-picked exmaple below
 <img src="images_thumb/image-1.png" alt="drawing" width="100"/>
 <img src="images_thumb/image-2.png" alt="drawing" width="100"/>
 
+### Using Gradio
+
+
+![alt text](images_thumb/image-3.png)
+
 ### Installation
 
 1. Install [poetry](https://python-poetry.org/docs/#installation)
