@@ -2,6 +2,10 @@ import faiss
 
 
 class NearestNeighborsSearch:
+    """
+    Class for simple image search using faiss 
+    """
+
     def __init__(self, embedding_dim):
         self.index = faiss.IndexFlatL2(embedding_dim)
 

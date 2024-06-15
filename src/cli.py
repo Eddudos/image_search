@@ -1,4 +1,4 @@
-import fire  # Для создания CLI
+import fire 
 import os
 import numpy as np
 
@@ -6,24 +6,18 @@ from image_preprocessing import ImagePreprocessor
 from feature_extraction import FeatureExtractor
 from nearest_neighbors import NearestNeighborsSearch
 
+
 class ImageSearchCLI:
     """
     Класс для реализации CLI приложения поиска похожих изображений
     """
 
     def __init__(self, data_path="data/test_data", model_name="resnet18", embedding_dim=512):
-        """
-        Args:
-            data_path (str): Путь к папке с данными, разделенными по классам.
-            model_name (str): Название модели для извлечения признаков (например, "resnet18")
-            embedding_dim (int): Размерность эмбеддинга, получаемого из модели
-        """
         self.data_path = data_path
         self.model_name = model_name
         self.embedding_dim = embedding_dim
 
-        # Создание экземпляров классов для предобработки, 
-        # извлечения признаков и поиска ближайших соседей
+        # Создание экземпляров классов для предобработки
         self.preprocessor = ImagePreprocessor()
         self.feature_extractor = FeatureExtractor(self.model_name)
         self.nn_search = NearestNeighborsSearch(self.embedding_dim)
@@ -44,7 +38,6 @@ class ImageSearchCLI:
 
                     # Сохраняем путь к изображению вместе с его индексом
                     self.image_paths[index_counter] = (image_path, class_name)
-
                     # Загрузка и предобработка изображения
                     image = self.preprocessor.preprocess(image_path)
 
@@ -62,7 +55,7 @@ class ImageSearchCLI:
         query_embedding = self.feature_extractor.extract_features(image)
         neighbors_indices = self.nn_search.search(query_embedding, top_k)
 
-        print(neighbors_indices)
+        print(f'Indices of nearest embeddings: {neighbors_indices} \n')
 
         found_image_paths = []
         for idx in neighbors_indices:
