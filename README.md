@@ -22,6 +22,7 @@ Obviously not cherry-picked exmaple below
 2. Use git clone
 ```bash 
 git clone https://github.com/Eddudos/image_search.git
+# https://gitfront.io/r/user-8370390/RM8DUsMeE6vv/image-search.git
 cd image_search
 ```
 3. Install dependencies and env
