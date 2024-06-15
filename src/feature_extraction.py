@@ -4,7 +4,7 @@ import torchvision.models as models
 
 class FeatureExtractor:
     def __init__(self, model_name="resnet18"):
-        self.model = getattr(models, model_name)(pretrained=True)
+        self.model = getattr(models, model_name)(weights="IMAGENET1K_V1")
         self.model = torch.nn.Sequential(*list(self.model.children())[:-1])
         self.model.eval()
 
