@@ -1,12 +1,6 @@
-import gradio as gr  
-import numpy as np
-import os
+import gradio as gr
 
-from image_preprocessing import ImagePreprocessor
-from feature_extraction import FeatureExtractor
-from nearest_neighbors import NearestNeighborsSearch
 from cli import ImageSearchCLI
-
 
 # Создание экземпляра приложения
 iface = ImageSearchCLI()
