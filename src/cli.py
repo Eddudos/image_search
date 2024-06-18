@@ -1,9 +1,10 @@
-import fire 
 import os
+
+import fire
 import numpy as np
 
-from image_preprocessing import ImagePreprocessor
 from feature_extraction import FeatureExtractor
+from image_preprocessing import ImagePreprocessor
 from nearest_neighbors import NearestNeighborsSearch
 
 
@@ -12,7 +13,12 @@ class ImageSearchCLI:
     Класс для реализации CLI приложения поиска похожих изображений
     """
 
-    def __init__(self, data_path="data/test_data", model_name="resnet18", embedding_dim=512):
+    def __init__(
+            self,
+            data_path: str = "data/test_data",
+            model_name: str = "resnet18",
+            embedding_dim: int = 512
+    ):
         self.data_path = data_path
         self.model_name = model_name
         self.embedding_dim = embedding_dim
@@ -26,10 +32,12 @@ class ImageSearchCLI:
         self.image_paths = {}
         self.load_data_and_create_index()
 
-    def load_data_and_create_index(self):
+    def load_data_and_create_index(
+            self
+    ):
         index_counter = 0
         concatenated_embeddings = np.empty((0, 512))
-        
+
         for class_name in os.listdir(self.data_path):
             class_path = os.path.join(self.data_path, class_name)
             if os.path.isdir(class_path):
@@ -44,13 +52,18 @@ class ImageSearchCLI:
                     # Извлечение признаков
                     embedding = self.feature_extractor.extract_features(image)
                     embedding = np.expand_dims(embedding, axis=0)
-                    
+
                     # Добавление эмбеддинга в индекс
                     concatenated_embeddings = np.concatenate((concatenated_embeddings, embedding), axis=0)
                     index_counter += 1
         self.nn_search.add_embeddings(concatenated_embeddings)
 
-    def search(self, image_path, class_name=None, top_k=6):
+    def search(
+            self,
+            image_path: str,
+            class_name: str = None,
+            top_k: int = 6
+    ) -> list[str]:
         image = self.preprocessor.preprocess(image_path)
         query_embedding = self.feature_extractor.extract_features(image)
         neighbors_indices = self.nn_search.search(query_embedding, top_k)
