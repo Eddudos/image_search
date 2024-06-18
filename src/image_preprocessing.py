@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import cv2
 import torch
 from torchvision import transforms as T
@@ -10,7 +12,7 @@ class ImagePreprocessor:
 
     def __init__(
             self,
-            image_size=(224, 224)
+            image_size: Tuple[int, int] = (224, 224)
     ):
         self.image_size = image_size
         self.transforms = T.Compose(
@@ -24,8 +26,8 @@ class ImagePreprocessor:
 
     def preprocess(
             self,
-            image_path
-    ):
+            image_path: str
+    ) -> torch.Tensor:
         image = cv2.imread(image_path)
         image = self.transforms(image)
         return image
